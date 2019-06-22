@@ -22,7 +22,51 @@ namespace Tavisca.Bootcamp.LanguageBasics.Exercise1
 
         public static int FindDigit(string equation)
         {
-            // Add your code here.
+ int a = 0, b = 0, c = 0, flag = 0;
+            string Digit = "";
+            string[] digits = equation.Replace("*", ",").Replace("=", ",").Split(",");
+            if (digits[0].Contains("?"))
+            {
+                b = Int32.Parse(digits[1]);
+                c = Int32.Parse(digits[2]);
+                if (c % b == 0)
+                    a = c / b;
+                else
+                    return -1;
+            }
+            else if (digits[1].Contains("?"))
+            {
+
+                a = Int32.Parse(digits[0]);
+                c = Int32.Parse(digits[2]);
+                if (c % a == 0)
+                    b = c / a;
+                else
+                    return -1;
+
+            }
+            else
+            {
+                b = Int32.Parse(digits[1]);
+                a = Int32.Parse(digits[0]);
+                c = a * b;
+
+
+            }
+
+            string ce = $"{a}*{b}={c}";
+            if (ce.Length == equation.Length)
+                for (int i = 0; i < equation.Length; i++)
+                {
+                    if (equation[i] == '?')
+                        Digit = ce[i].ToString();
+                    else
+                    if (equation[i] != ce[i])
+                        return -1;
+                }
+            else
+                return -1;
+            return Int32.Parse(Digit); throw new NotImplementedException();
             throw new NotImplementedException();
         }
     }
